@@ -14,4 +14,5 @@ Botón derecho en elex > start
 > OJO: sale un Token
 6. Probar en http://localhost:8101/login
 > Anda! Y la contraseña? las credenciales son soltel / admin
+7. Está instalado swagger -> http://localhost:8101/swagger-ui/index.html
 
