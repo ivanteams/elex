@@ -9,7 +9,7 @@ import { TiposExpediente } from '../models/tipos-expediente.model';
   providedIn: 'root'
 })
 export class TiposExpedienteService {
-  private apiUrl = 'http://localhost:8101/tipos_expediente';
+  private apiUrl = 'http://localhost:8080/tipos_expediente';
 
   constructor(private http: HttpClient) { }
 

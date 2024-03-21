@@ -32,7 +32,8 @@ public class TiposExpedienteController {
     public TiposExpedienteModel insertarTipo(@PathVariable String materia) {
         TiposExpedienteModel tipo = new TiposExpedienteModel();
         tipo.setMateria(materia);
-        return servicioTipo.insertarTipo(tipo);
+        tipo = servicioTipo.insertarTipo(tipo);
+        return tipo;
     }
 
     @PutMapping("/actualizar/{id}/{materia}")

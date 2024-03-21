@@ -27,22 +27,8 @@ export class FormulariosTiposComponent implements OnInit {
 
   onSubmit(): void {
     this.tiposExpedienteService.insertarTipo(this.materia).subscribe(result => {
-      console.log('Resultado del servidor:', result);
-      if (result && result.id) {
-        this.obtenerTiposExpediente(); // Llama a la actualización de la lista solo después de una inserción exitosa
-      } 
+      this.tipos.push(result);
       this.materia = '';
-    });
-  }
-
-  obtenerTiposExpediente(): void {
-    this.tiposExpedienteService.consultarTipos().subscribe({
-      next: (tipos: TiposExpediente[]) => {
-        this.tipos = tipos;
-      },
-      error: (error: any) => {
-        console.error('Error al obtener los tipos de expediente:', error);
-      }
     });
   }
 }

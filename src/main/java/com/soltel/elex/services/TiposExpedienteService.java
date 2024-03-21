@@ -15,7 +15,7 @@ public class TiposExpedienteService {
     private TiposExpedienteRepository repository;
 
     public List<TiposExpedienteModel> consultarTipos() {
-        return repository.findAll();
+        return repository.findAllByOrderByIdAsc();
     }
 
     public TiposExpedienteModel insertarTipo(TiposExpedienteModel tipo) {
