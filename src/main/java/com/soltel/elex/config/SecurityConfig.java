@@ -1,5 +1,6 @@
 package com.soltel.elex.config;
 
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -11,37 +12,39 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filtro(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/inicio").hasRole("ADMIN")
-                        .anyRequest().authenticated())
-                .formLogin(form -> form
-                        .defaultSuccessUrl("/inicio", true));
-        // Otras configuraciones de seguridad según sea necesario
-
+            .cors(cors -> cors.configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues()))
+            .csrf(csrf -> csrf.disable()) // Deshabilitar CSRF
+            .authorizeHttpRequests(auth -> auth
+            		.requestMatchers("/clientes/**", "/reservas/**").permitAll() 	// Permitir solicitudes a /clientes y /reservas
+                .anyRequest().authenticated())
+            .formLogin(form -> form
+                .defaultSuccessUrl("/inicio", true));
+                
         return http.build();
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public PasswordEncoder codificador() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
-        UserDetails user = User.builder()
-                .username("soltel")
-                .password(passwordEncoder.encode("admin"))
-                .roles("ADMIN")
-                .build();
+    public UserDetailsService servicio(PasswordEncoder codificador) {
+        UserDetails usuarioAdmin = User.builder()
+            .username("soltel")
+            .password(codificador.encode("admin"))
+            .roles("ADMIN")
+            .build();
 
-        return new InMemoryUserDetailsManager(user);
+        return new InMemoryUserDetailsManager(usuarioAdmin);
     }
 }
