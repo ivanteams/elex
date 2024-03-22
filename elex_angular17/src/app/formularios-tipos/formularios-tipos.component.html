@@ -1,1 +1,28 @@
 <p>formularios-tipos works!</p>
+<!-- src/app/formularios-tipos/formularios-tipos.component.html -->
+
+<div class="container mt-3">
+    <form (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="materiaInput" class="form-label">Materia</label>
+        <input type="text" class="form-control" id="materiaInput" [(ngModel)]="materia" name="materia">
+      </div>
+      <button type="submit" class="btn btn-primary">Agregar</button>
+    </form>
+  
+    <table class="table mt-3">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Materia</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let tipo of tipos">
+          <td>{{ tipo.id }}</td>
+          <td>{{ tipo.materia }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
