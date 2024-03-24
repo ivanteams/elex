@@ -1,20 +1,13 @@
-// src/app/formularios-tipos/formularios-tipos.component.ts
-
 import { Component, OnInit } from '@angular/core';
-import { TiposExpedienteService } from '../services/tipos-expediente.service';
-import { TiposExpediente } from '../models/tipos-expediente.model';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { TiposExpedienteService } from './services/formularios-tipos.service';
+import { TiposExpediente } from './models/formularios-tipos.model';
+
 
 @Component({
   selector: 'app-formularios-tipos',
-  standalone: true,
-  imports: [
-    FormsModule, // Ya importado para ngModel
-    CommonModule // Importa CommonModule aquí
-  ],
+  standalone: false,
   templateUrl: './formularios-tipos.component.html',
-  styleUrls: ['./formularios-tipos.component.css']
+  styleUrl: './formularios-tipos.component.css'
 })
 export class FormulariosTiposComponent implements OnInit {
   tipos: TiposExpediente[] = [];
@@ -53,3 +46,4 @@ export class FormulariosTiposComponent implements OnInit {
     });
   }
 }
+

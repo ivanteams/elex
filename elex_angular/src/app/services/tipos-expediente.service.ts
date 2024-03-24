@@ -8,6 +8,7 @@ import { TiposExpediente } from '../models/tipos-expediente.model';
 @Injectable({
   providedIn: 'root'
 })
+
 export class TiposExpedienteService {
   private apiUrl = 'http://localhost:8101/tipos_expediente';
 
