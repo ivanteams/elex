@@ -37,33 +37,33 @@ Está en src/main/resources/static/elex.mysql
 
 ```mermaid
 erDiagram
-    TIPOS_EXPEDIENTE ||--o{ EXPEDIENTES : "tiene"
+    TIPOS_EXPEDIENTE ||--o{ EXPEDIENTES : contiene
     TIPOS_EXPEDIENTE {
-        TINYINT id PK "Clave primaria"
-        VARCHAR(20) materia "Materia única"
+        TINYINT id PK
+        VARCHAR materia "Materia única"
     }
-    EXPEDIENTES ||--o{ ACTUACIONES : "contiene"
-    EXPEDIENTES ||--o{ DOCUMENTOS : "contiene"
+    EXPEDIENTES ||--o{ ACTUACIONES : contiene
+    EXPEDIENTES ||--o{ DOCUMENTOS : contiene
     EXPEDIENTES {
-        INT id PK "Clave primaria"
-        VARCHAR(50) codigo "Código único"
-        DATE fecha "Fecha de creación"
-        ENUM estado "Pendiente / Enviado / Erróneo"
-        VARCHAR(70) opciones "Opciones del expediente"
-        VARCHAR(255) descripcion "Descripción del expediente"
-        TINYINT tipo FK "Tipo de expediente"
+        INT id PK
+        VARCHAR codigo "Código único"
+        DATE fecha
+        ENUM estado "Pendiente/Enviado/Erróneo"
+        VARCHAR opciones
+        VARCHAR descripcion
+        TINYINT tipo FK
     }
     ACTUACIONES {
-        INT id PK "Clave primaria"
-        VARCHAR(255) descripcion "Descripción de la actuación"
-        BOOLEAN finalizado "Estado de finalización"
-        DATE fecha "Fecha de la actuación"
-        INT expediente FK "Expediente relacionado"
+        INT id PK
+        VARCHAR descripcion
+        BOOLEAN finalizado
+        DATE fecha
+        INT expediente FK
     }
     DOCUMENTOS {
-        INT id PK "Clave primaria"
-        VARCHAR(255) ruta "Ruta del documento"
-        DECIMAL(6,2) tasa "Tasa asociada"
-        INT expediente FK "Expediente relacionado"
+        INT id PK
+        VARCHAR ruta
+        DECIMAL tasa
+        INT expediente FK
     }
 ```
