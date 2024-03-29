@@ -30,3 +30,40 @@ Está en src/main/resources/static/elex.mysql
 ```
 10. Y probamos angular: http://localhost:4200
 
+## Modelo BBDD
+
+- Empleando Mermaid
+  - https://mermaid.js.org/intro/
+
+```mermaid
+erDiagram
+    TIPOS_EXPEDIENTE ||--o{ EXPEDIENTES : "tiene"
+    TIPOS_EXPEDIENTE {
+        TINYINT id PK "Clave primaria"
+        VARCHAR(20) materia "Materia única"
+    }
+    EXPEDIENTES ||--o{ ACTUACIONES : "contiene"
+    EXPEDIENTES ||--o{ DOCUMENTOS : "contiene"
+    EXPEDIENTES {
+        INT id PK "Clave primaria"
+        VARCHAR(50) codigo "Código único"
+        DATE fecha "Fecha de creación"
+        ENUM estado "Pendiente / Enviado / Erróneo"
+        VARCHAR(70) opciones "Opciones del expediente"
+        VARCHAR(255) descripcion "Descripción del expediente"
+        TINYINT tipo FK "Tipo de expediente"
+    }
+    ACTUACIONES {
+        INT id PK "Clave primaria"
+        VARCHAR(255) descripcion "Descripción de la actuación"
+        BOOLEAN finalizado "Estado de finalización"
+        DATE fecha "Fecha de la actuación"
+        INT expediente FK "Expediente relacionado"
+    }
+    DOCUMENTOS {
+        INT id PK "Clave primaria"
+        VARCHAR(255) ruta "Ruta del documento"
+        DECIMAL(6,2) tasa "Tasa asociada"
+        INT expediente FK "Expediente relacionado"
+    }
+```

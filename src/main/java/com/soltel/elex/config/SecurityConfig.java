@@ -12,7 +12,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.web.cors.CorsConfiguration;
 
 @Configuration
 @EnableWebSecurity
@@ -21,7 +20,8 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filtro(HttpSecurity http) throws Exception {
         http
-            .cors(cors -> cors.configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues()))
+            // Esta configuración es bastante permisiva, pero entra en conflicto con MiConfiguracionCors.java
+            //.cors(cors -> cors.configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues()))
             .csrf(csrf -> csrf.disable()) // Deshabilitar CSRF
             .authorizeHttpRequests(auth -> auth
             		.requestMatchers("/tipos_expediente/**").permitAll() 	// Permitir solicitudes a /clientes y /reservas
